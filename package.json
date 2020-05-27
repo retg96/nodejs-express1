@@ -5,6 +5,7 @@
   "main": "src/coremodulos.js",
   "scripts": {
     "start": "node src/coremodulos.js",
+    "dev": "nodemon src/coremodulos.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Emma Gonzalez",
