@@ -12,18 +12,35 @@ const app = express();
 
 //definimos la ruta por default con express
 //definimos rutas de tipo get
-app.get("/", function(request, response){
+// app.get("/", function(request, response){
+//     response.status(200).send("Hello");
+// });
+
+//funcion flecha
+app.get("/",(request, response)=>{
     response.status(200).send("Hello");
 });
 
-app.get("/info", function(request,response){
+
+// app.get("/info", function(request,response){
+//     info("Hola Info");
+//     response.send("info");
+// });
+
+//funcion flecha
+app.get("/info",(request,response)=>{
     info("Hola Info");
     response.send("info");
 });
 
 
 //definimos la pagina para el error 404
-app.get("*", function(request, response){
+// app.get("*", function(request, response){
+//     response.status(404).send("NOT FOUND");
+// });
+
+//funcion flecha
+app.get("*",(request, response)=>{
     response.status(404).send("NOT FOUND");
 });
 

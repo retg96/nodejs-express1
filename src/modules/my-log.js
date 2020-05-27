@@ -25,12 +25,12 @@
 
 //Exportaciones parciales 2
 
-function info(text) {
+const info=(text) => {
     console.log("INFO",text);
     return text;
 }
 
-function error(text) {
+const error=(text) =>{
     console.log("Error",text);
     return text;
 }
