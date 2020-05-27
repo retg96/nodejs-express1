@@ -10,6 +10,7 @@
   "author": "Emma Gonzalez",
   "license": "MIT",
   "dependencies": {
-    "countries-list": "^2.5.4"
+    "countries-list": "^2.5.4",
+    "express": "^4.17.1"
   }
 }
