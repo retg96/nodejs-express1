@@ -33,6 +33,14 @@ app.get("/info",(request,response)=>{
     response.send("info");
 });
 
+app.get("/country",(request,response)=>{
+    console.log('request.query', request.query);
+    // response.send(JSON.stringify(countries[request.query.code]));
+
+    //le man damos un json como respuesta al cliente
+    response.json(countries[request.query.code]);
+});
+
 
 //definimos la pagina para el error 404
 // app.get("*", function(request, response){
@@ -95,7 +103,7 @@ app.get("*",(request, response)=>{
 //le decimos al servidor en que puerto se ejecute
 
 //ejecutamos la app de express
-app.listen(4000, function(){
+app.listen(4000,()=>{
     console.log('Corriendo en el puerto: 4000 ');
 });
 
