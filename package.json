@@ -1,0 +1,16 @@
+{
+  "name": "curso-nodejs",
+  "version": "0.0.1",
+  "description": "introduccion a node js",
+  "main": "src/coremodulos.js",
+  "scripts": {
+    "start": "node src/coremodulos.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Emma Gonzalez",
+  "license": "MIT",
+  "dependencies": {
+    "countries-list": "^2.5.4",
+    "express": "^4.17.1"
+  }
+}
