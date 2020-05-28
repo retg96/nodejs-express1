@@ -5,7 +5,7 @@ const express = require('express')
 const {info,error}=require("./modules/my-log");
 
 //importamos de manera parcial countries
-const {countries} = require("countries-list");
+const {countries,languages} = require("countries-list");
 
 //creamos una app de express
 const app = express();
@@ -33,12 +33,60 @@ app.get("/info",(request,response)=>{
     response.send("info");
 });
 
+//querys params
 app.get("/country",(request,response)=>{
     console.log('request.query', request.query);
     // response.send(JSON.stringify(countries[request.query.code]));
 
     //le man damos un json como respuesta al cliente
     response.json(countries[request.query.code]);
+});
+
+//Alterntiva a query params
+// app.get("/languages/:lang",(request,response)=>{
+//     console.log('request.params', request.params);
+//     const lang = languages[request.params.lang];
+//     // response.send(JSON.stringify(countries[request.query.code]));
+
+//     //si existe lang
+//     if(lang){
+//         response.json({status: 'OK', data: lang});
+//         // response.json(lang); 
+//     }//sino existe
+//     else{
+//         response
+//         .status(404)
+//         .json({
+//             status: 'Not Found',
+//             message: `language ${request.params.lang} not found`
+//             // message: 'language' + request.params.lang + 'not found'
+//         });
+//     }
+
+// });
+
+
+//Alterntiva a query params
+app.get("/languages/:lang/:countryCode",(request,response)=>{
+    console.log('request.params', request.params);
+    const lang = languages[request.params.lang];
+    // response.send(JSON.stringify(countries[request.query.code]));
+
+    //si existe lang
+    if(lang){
+        response.json({status: 'OK', data: lang});
+        // response.json(lang); 
+    }//sino existe
+    else{
+        response
+        .status(404)
+        .json({
+            status: 'Not Found',
+            message: `language ${request.params.lang} not found`
+            // message: 'language' + request.params.lang + 'not found'
+        });
+    }
+
 });
 
 
@@ -52,53 +100,6 @@ app.get("*",(request, response)=>{
     response.status(404).send("NOT FOUND");
 });
 
-
-
-
-
-//utilizamos el modulo http para crear un servidor
-// var servidor =  http.createServer(function(pathname, response) {
-
-//     var parsed = url.parse(pathname.url);
-//     console.log("parsed: ", parsed);
-
-//     var pathname = parsed.pathname;
-//     var query = querystring.parse(parsed.query); 
-//     console.log("query", query);
-
-//     //filtramos paginas en el servidor
-
-//     if(pathname ==="/"){
-//         response.writeHead(200,{'Content-Type': 'text/html'});
-//         response.write('<html><body><p>HomePage</p></body></html>');
-//         response.end();
-//     }else if(pathname ==="/exit"){
-//         response.writeHead(200,{'Content-Type': 'text/html'});
-//         response.write('<html><body><p>Bye</p></body></html>');
-//         response.end();
-//     }else if(pathname ==="/info"){
-//         var result = info(pathname);
-//         response.writeHead(200,{'Content-Type': 'text/html'});
-//         response.write(result);
-//         response.end();
-//     }
-//     else if(pathname ==="/error"){
-//         var result = error(pathname);
-//         response.writeHead(200,{'Content-Type': 'text/html'});
-//         response.write(result);
-//         response.end();
-//     }else if(pathname ==="/country"){
-//         response.writeHead(200,{'Content-Type': 'application/json'});
-//         response.write(JSON.stringify(countries[query.code])); //necesitamos poner un string en el write y como countries-list regresa objetos json con el JSON.stringify convertimos ese json en string
-//         response.end();
-//     }else{
-
-//         response.writeHead(400,{'Content-Type': 'text/html'});
-//         response.write('<html><body><p>Not Found</p></body></html>');
-//         response.end();
-//     }
-    
-// });
 
 //le decimos al servidor en que puerto se ejecute
 
