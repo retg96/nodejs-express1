@@ -43,31 +43,7 @@ app.get("/country",(request,response)=>{
 });
 
 //Alterntiva a query params
-// app.get("/languages/:lang",(request,response)=>{
-//     console.log('request.params', request.params);
-//     const lang = languages[request.params.lang];
-//     // response.send(JSON.stringify(countries[request.query.code]));
-
-//     //si existe lang
-//     if(lang){
-//         response.json({status: 'OK', data: lang});
-//         // response.json(lang); 
-//     }//sino existe
-//     else{
-//         response
-//         .status(404)
-//         .json({
-//             status: 'Not Found',
-//             message: `language ${request.params.lang} not found`
-//             // message: 'language' + request.params.lang + 'not found'
-//         });
-//     }
-
-// });
-
-
-//Alterntiva a query params
-app.get("/languages/:lang/:countryCode",(request,response)=>{
+app.get("/languages/:lang",(request,response)=>{
     console.log('request.params', request.params);
     const lang = languages[request.params.lang];
     // response.send(JSON.stringify(countries[request.query.code]));
@@ -88,6 +64,30 @@ app.get("/languages/:lang/:countryCode",(request,response)=>{
     }
 
 });
+
+
+//Alterntiva a query params
+// app.get("/languages/:lang/:countryCode",(request,response)=>{
+//     console.log('request.params', request.params);
+//     const lang = languages[request.params.lang];
+//     // response.send(JSON.stringify(countries[request.query.code]));
+
+//     //si existe lang
+//     if(lang){
+//         response.json({status: 'OK', data: lang});
+//         // response.json(lang); 
+//     }//sino existe
+//     else{
+//         response
+//         .status(404)
+//         .json({
+//             status: 'Not Found',
+//             message: `language ${request.params.lang} not found`
+//             // message: 'language' + request.params.lang + 'not found'
+//         });
+//     }
+
+// });
 
 
 //definimos la pagina para el error 404
