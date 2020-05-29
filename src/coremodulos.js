@@ -1,13 +1,11 @@
 //importamos express js
-const express = require('express')
+const express = require('express');
 
-//importamos routes desde el archivo index.js
-const routes = require('./routes/index');
+const routesV1= require('./routes/v1');
 
 const app = express();
 
-//llamamos la funcion routes
-routes(app);
+routesV1(app);
 
 //le decimos al servidor en que puerto se ejecute
 //ejecutamos la app de express
