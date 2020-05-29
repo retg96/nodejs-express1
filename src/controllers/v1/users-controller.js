@@ -1,5 +1,18 @@
-const createUser =(req, res)=>{
+const bcrypt = require('bcrypt');
+
+const createUser = async(req, res)=>{
+try {
+    console.log('req.body', req.body);
+    //guardamos este usuario en una bd
+    //encriptamos la contraseña del usuario y la guardamos en una bd
+    const hash = await bcrypt.hash(req.body.password, 15);
+    console.log('FIN', hash)
     res.send({status: 'ok', message:'user created'});
+    
+} catch (error) {
+    console.log(error);
+    res.status(500).send({status: "ERROR", message: error.message});
+}
 };
 
 const deleteUser =(req, res)=>{
