@@ -15,7 +15,7 @@ const app = express();
 // const MONGO2= process.env.MONGO || `mongodb+srv://test1-nodejs:<password>@curso-node-js-lwncf.gcp.mongodb.net/test?retryWrites=true&w=majority`;
 // process.env.MONGO= process.env.MONGO || `mongodb+srv://test1-nodejs:<password>@curso-node-js-lwncf.gcp.mongodb.net/test?retryWrites=true&w=majority`;
 
-console.log('MONGO', process.env.MONGO);
+// console.log('MONGO', process.env.MONGO);
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
