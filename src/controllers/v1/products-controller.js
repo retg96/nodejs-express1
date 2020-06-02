@@ -17,7 +17,16 @@ const createProduct = async (req, res)=>{
     }
 };
 const deleteProduct = (req, res)=>{};
-const getProducts = (req, res)=>{};
+
+const getProducts = async (req, res)=>{
+    try {
+      const products = await Products.find().populate('usuario', 'username email data role').select('title desc price');
+      res.send({status:'Ok', data:products});
+    } catch (e) {
+        console.log('deleteProduct error: ', e);
+        res.status(500).send({status:'ERROR', data: e.message});
+    }
+};
 
 module.exports={
     createProduct,
