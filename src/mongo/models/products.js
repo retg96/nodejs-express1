@@ -7,6 +7,8 @@ const productSchema= new Schema(
     title:{type:String, required:true},
     desc:{type:String, required:true},
     price:{type:String, required:true},
+    images: [{type:String, required:true}],
+    usuario:{type:mongoose.Schema.Types.ObjectId, ref: 'user'}
 
 },
 {

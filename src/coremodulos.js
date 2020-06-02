@@ -30,9 +30,10 @@ const PORT = process.env.PORT || 4000;
 
 
 mongoose
-    .connect('mongodb://localhost/my_database', {
+    .connect('mongodb+srv://dbRetg:Teran2016@cluster-node-js-wqtlw.gcp.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
     })
     .then(()=>{
         console.log('Connected to mongodb');
