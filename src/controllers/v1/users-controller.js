@@ -49,8 +49,24 @@ const getUsers =(req,res)=>{
     res.send({status: 'ok', data:[]});
 };
 
-const updateUser=(req,res)=>{
-    res.send({status: 'ok', message:'user update'});
+const updateUser= async(req,res)=>{
+   try {
+       const {username,email,data,userId}= req.body;
+       await user.findByIdAndUpdate(userId,{
+           username,
+           email,
+           data
+       });
+       res.send({status: 'OK', message: 'user updated'});
+   } catch (error) {
+       if(error.code && error.code ===11000){
+           res
+                .status(400)
+                .send({status: 'DUPLICATED_VALUES', message: error.keyValue});
+                return;
+       }
+       res.status(500).send({status:'ERROR', message:'user updated'});
+   }
 };
 
 //los importamos como objetos

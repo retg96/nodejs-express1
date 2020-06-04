@@ -20,7 +20,11 @@ const deleteProduct = (req, res)=>{};
 
 const getProducts = async (req, res)=>{
     try {
-      const products = await Products.find().populate('usuario', 'username email data role').select('title desc price');
+      const products = await Products.find({
+            price:{ $gt: 16 }
+      })
+      .select('title desc price')
+      .populate('usuario', 'username email data role');
       res.send({status:'Ok', data:products});
     } catch (e) {
         console.log('deleteProduct error: ', e);
@@ -28,8 +32,22 @@ const getProducts = async (req, res)=>{
     }
 };
 
+const getProductsByUser = async (req, res)=>{
+    try {
+      const products = await Products.find({
+        usuario: req.params.usuarioId
+      });
+      res.send({status:'Ok', data:products});
+    } catch (e) {
+        console.log('deleteProduct error: ', e);
+        res.status(500).send({status:'ERROR', data: e.message});
+    }
+};
+
+
 module.exports={
     createProduct,
     deleteProduct,
-    getProducts
+    getProducts,
+    getProductsByUser
 };
