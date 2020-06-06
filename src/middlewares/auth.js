@@ -26,14 +26,14 @@ const isAuth = (req, res, next)=>{
         //     };
             
         // }
-        req.sessionData = {userId: data.userId};
+        req.sessionData = {userId: data.userId, role: data.role};
         next(); 
     }else{
         throw{
             code: 403,
             status: "ACCESS_DENIED",
             message: 'Missing header token'
-        }
+        };
         
     }
     } catch (e) {
@@ -44,4 +44,24 @@ const isAuth = (req, res, next)=>{
       
 };
 
-module.exports = {isAuth, isValidHostname};
+const isAdmin= (req, res, next)=>{
+    try {
+        const{role} = req.sessionData;
+        console.log('isAdmin', role);
+        if(role != 'admin'){
+            throw{
+                code: 403,
+                status: "ACCESS_DENIED",
+                message: 'Invalid Role'
+            };
+        }    
+        next(); 
+    } catch (e) {
+        res
+            .status(e.code || 500)
+            .send({status: e.status || 'ERROR', message: e.message});
+    }
+};
+
+
+module.exports = {isAuth, isValidHostname, isAdmin};
