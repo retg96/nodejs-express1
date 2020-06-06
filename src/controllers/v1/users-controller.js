@@ -3,7 +3,7 @@ const user = require('../../mongo/models/users');
 const jwt = require('jsonwebtoken');
 
 //tiempo de expiracion del token
-const expiresIn = 60*5;
+const expiresIn = 60*10;
 
 //autenticacion de usuario
 const login = async(req,res)=>{
@@ -87,12 +87,19 @@ const getUsers =(req,res)=>{
 
 const updateUser= async(req,res)=>{
    try {
-       const {username,email,data,userId}= req.body;
-       await user.findByIdAndUpdate(userId,{
+       console.log('req.sessionData', req.sessionData.userId);
+       const {username,email,data}= req.body;
+    //    const {username,email,data,userId}= req.body;
+       await user.findByIdAndUpdate(req.sessionData.userId,{
            username,
            email,
            data
        });
+    //    await user.findByIdAndUpdate(userId,{
+    //     username,
+    //     email,
+    //     data
+    // });
        res.send({status: 'OK', message: 'user updated'});
    } catch (error) {
        if(error.code && error.code ===11000){
