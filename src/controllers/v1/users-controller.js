@@ -93,8 +93,13 @@ const deleteUser = async(req, res)=>{
     }
 };
 
-const getUsers =(req,res)=>{
-    res.send({status: 'ok', data:[]});
+const getUsers =async(req,res)=>{
+    try {
+        const users= await user.find().select({password: 0, _v:0, role: 0});
+        res.send({status: 'OK', data: users});
+    } catch (e) {
+        res.status(500).send({status:'ERROR', message:e.message});
+    }
 };
 
 const updateUser= async(req,res)=>{
