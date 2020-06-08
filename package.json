@@ -4,9 +4,10 @@
   "description": "introduccion a node js",
   "main": "src/coremodulos.js",
   "scripts": {
-    "start": "node src/coremodulos.js",
-    "dev": "nodemon src/coremodulos.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/coremodulos.js",
+    "dev": "nodemon src/index.ts",
+    "build": "tsc -p ."
   },
   "author": "Emma Gonzalez",
   "license": "MIT",
@@ -22,6 +23,8 @@
     "mongoose": "^5.9.16"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
   }
 }
