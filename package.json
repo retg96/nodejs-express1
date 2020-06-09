@@ -1,0 +1,30 @@
+{
+  "name": "curso-nodejs",
+  "version": "0.0.1",
+  "description": "introduccion a node js",
+  "main": "src/coremodulos.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/coremodulos.js",
+    "dev": "nodemon src/index.ts",
+    "build": "tsc -p ."
+  },
+  "author": "Emma Gonzalez",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "countries-list": "^2.5.4",
+    "dotenv": "^8.2.0",
+    "dotenv-safe": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.5.8",
+    "mongoose": "^5.9.16"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
+  }
+}
