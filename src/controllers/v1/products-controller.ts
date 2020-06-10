@@ -1,6 +1,9 @@
-const Products= require ('../../mongo/models/products');
+import {Request, Response} from 'express';
+import Products from '../../mongo/models/products';
 
-const createProduct = async (req, res)=>{
+
+
+const createProduct = async (req:Request, res:Response): Promise<void>=>{
     try {
         const{title, desc, price, images, usuarioId} = req.body;
         const product = await Products.create({
@@ -16,9 +19,10 @@ const createProduct = async (req, res)=>{
         res.status(500).send({status: 'ERROR', data: e.message});
     }
 };
-const deleteProduct = (req, res)=>{};
 
-const getProducts = async (req, res)=>{
+// const deleteProduct = (req:Request, res:Response)=>{};
+
+const getProducts = async (req:Request, res:Response): Promise<void>=>{
     try {
       const products = await Products.find({
             price:{ $gt: 16 }
@@ -32,7 +36,7 @@ const getProducts = async (req, res)=>{
     }
 };
 
-const getProductsByUser = async (req, res)=>{
+const getProductsByUser = async (req:Request, res:Response): Promise<void>=>{
     try {
       const products = await Products.find({
         usuario: req.params.usuarioId
@@ -45,9 +49,8 @@ const getProductsByUser = async (req, res)=>{
 };
 
 
-module.exports={
+export default{
     createProduct,
-    deleteProduct,
     getProducts,
     getProductsByUser
 };

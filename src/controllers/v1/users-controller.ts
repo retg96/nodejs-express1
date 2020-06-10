@@ -1,13 +1,14 @@
-const bcrypt = require('bcrypt');
-const user = require('../../mongo/models/users');
-const jwt = require('jsonwebtoken');
-const Products= require('../../mongo/models/products');
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import {Request, Response} from 'express';
+import user from '../../mongo/models/users';
+import Products from '../../mongo/models/products';
 
 //tiempo de expiracion del token
 const expiresIn = 60*10;
 
 //autenticacion de usuario
-const login = async(req,res)=>{
+const login = async(req: Request,res:Response): Promise<void>=>{
     try {
         const {email, password}= req.body;
         const user1 = await user.findOne({email});
@@ -18,7 +19,7 @@ const login = async(req,res)=>{
                   userId: user1._id,
                   role: user1.role  
                 },
-                    process.env.JWT_SECRET,
+                    process.env.JWT_SECRET!,
                     {expiresIn}
                 );
                 res.send({
@@ -38,7 +39,7 @@ const login = async(req,res)=>{
     }
 };
 
-const createUser = async(req, res)=>{
+const createUser = async(req:Request, res:Response): Promise<void>=>{
 try {
     console.log('req.body', req.body);
     //guardamos este usuario en una bd
@@ -78,7 +79,7 @@ try {
 }
 };
 
-const deleteUser = async(req, res)=>{
+const deleteUser = async(req:Request, res:Response):Promise<void>=>{
     try {
         const {userId}= req.body;
         if(!userId){
@@ -93,7 +94,7 @@ const deleteUser = async(req, res)=>{
     }
 };
 
-const getUsers =async(req,res)=>{
+const getUsers =async(req:Request,res:Response): Promise<void>=>{
     try {
         const users= await user.find().select({password: 0, _v:0, role: 0});
         res.send({status: 'OK', data: users});
@@ -102,7 +103,7 @@ const getUsers =async(req,res)=>{
     }
 };
 
-const updateUser= async(req,res)=>{
+const updateUser= async(req:Request,res:Response):Promise<void>=>{
    try {
        console.log('req.sessionData', req.sessionData.userId);
        const {username,email,data}= req.body;
@@ -130,7 +131,7 @@ const updateUser= async(req,res)=>{
 };
 
 //los importamos como objetos
-module.exports={
+export default{
     createUser,
     deleteUser,
     getUsers,
